@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+readonly image="${1:-gordonstratton/dynamodb-local:latest}"
+
+docker run -d \
+  --name dynamodb-local \
+  -p 127.0.0.1:8000:8000 \
+  ${image} "$@"
