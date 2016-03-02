@@ -11,6 +11,8 @@ http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLo
 `tools/run-dev` is available if you want to daemonize the container for
 development.
 
+Other tags can be found on [Docker Hub](https://hub.docker.com/r/gordonstratton/dynamodb-local/).
+
 ## Updating
 
 For the sake of reproducible builds, the versioned tarball pointed to by the
