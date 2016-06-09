@@ -1,4 +1,4 @@
-DYNAMODB_VERSION=2016-03-01
+DYNAMODB_VERSION=2016-05-17
 IMAGE_NAME=gordonstratton/dynamodb-local
 
 .PHONY: container
