@@ -5,14 +5,16 @@ RUN mkdir /srv/dynamodb \
     | tar -xz -C /srv/dynamodb \
   && chown -R nobody:nogroup /srv/dynamodb
 
+WORKDIR /srv/dynamodb
+
 USER nobody:nogroup
 
 EXPOSE 8000
 
 ENTRYPOINT [ \
   "java", \
-  "-Djava.library.path=/srv/dynamodb/DynamoDBLocal_lib", \
-  "-jar", "/srv/dynamodb/DynamoDBLocal.jar" \
+  "-Djava.library.path=./DynamoDBLocal_lib", \
+  "-jar", "./DynamoDBLocal.jar" \
 ]
 
 CMD ["-inMemory"]
