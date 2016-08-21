@@ -4,14 +4,16 @@
 
 http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html
 
+Images with tags other than `latest` can be found on
+[Docker Hub](https://hub.docker.com/r/gordonstratton/dynamodb-local/).
+
 ## Quickstart
 
-`docker run -it -p 127.0.0.1:8000:8000 gordonstratton/dynamodb-local:latest`
+```sh
+docker-compose up
+```
 
-`tools/run-dev` is available if you want to daemonize the container for
-development.
-
-Other tags can be found on [Docker Hub](https://hub.docker.com/r/gordonstratton/dynamodb-local/).
+This will run a DynamoDB Local instance exposing port 8000. Check out `docker-compose.yml` for more details.
 
 ## Updating
 
