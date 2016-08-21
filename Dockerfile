@@ -1,6 +1,7 @@
-FROM java:openjdk-8u91-jre
+FROM openjdk:8u92-jre-alpine
 
-RUN mkdir /srv/dynamodb \
+RUN apk add --no-cache curl \
+  && mkdir /srv/dynamodb \
   && curl -sL http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_2016-05-17.tar.gz \
     | tar -xz -C /srv/dynamodb \
   && chown -R nobody:nogroup /srv/dynamodb
