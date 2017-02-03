@@ -1,7 +1,9 @@
-FROM openjdk:8u102-jre
+FROM openjdk:8u111-jre
+
+ARG VERSION_ID=wRzlbckhjnZIm0CVgcmTkkgmHBAB9l_U
 
 RUN mkdir /srv/dynamodb \
-  && curl -sL http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_2016-05-17.tar.gz \
+  && curl -sL https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz?versionId=${VERSION_ID} \
     | tar -xz -C /srv/dynamodb \
   && chown -R nobody:nogroup /srv/dynamodb
 

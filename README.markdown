@@ -17,10 +17,13 @@ This will run a DynamoDB Local instance exposing port 8000. Check out `docker-co
 
 ## Updating
 
-For the sake of reproducible builds, the versioned tarball pointed to by the
-"latest" URL is specified in the `Dockerfile`. To obtain the latest link and
-update your own `Dockerfile`, you can use something like the following:
+For the sake of reproducible builds, the version of the tarball is specified in
+the `Dockerfile`. To obtain the latest version ID and update your own
+`Dockerfile`, you can use something like the following:
 
 ```sh
-curl -sI http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz | grep ^Location: | cut -c11-
+curl -sI https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz
 ```
+
+You will want to look for `x-amz-version-id` and use that value as VERSION\_ID
+in the `Dockerfile`.
