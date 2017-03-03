@@ -1,9 +1,9 @@
-FROM openjdk:8u111-jre
+FROM openjdk:8u121-jre
 
-ARG VERSION_ID=wRzlbckhjnZIm0CVgcmTkkgmHBAB9l_U
+ARG ETAG="\"a513a2218eca571f079202945cea6a55-3\""
 
 RUN mkdir /srv/dynamodb \
-  && curl -sL https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz?versionId=${VERSION_ID} \
+  && curl -H "If-Match: ${ETAG}" -sL https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz \
     | tar -xz -C /srv/dynamodb \
   && chown -R nobody:nogroup /srv/dynamodb
 
