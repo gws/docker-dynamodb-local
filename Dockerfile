@@ -1,4 +1,4 @@
-FROM openjdk:8u121-jre
+FROM openjdk:8-jre-slim
 
 ARG ETAG="\"f513a2218eca571f079202945cea6a55-3\""
 
