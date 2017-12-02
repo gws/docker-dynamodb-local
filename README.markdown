@@ -28,3 +28,11 @@ curl -sI https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest
 You will want to look for `ETag` and use that value as the `ETAG` build argument
 in the `Dockerfile`. Remember that the quotes around `ETag` values are part of
 the value, and should be escaped.
+
+## Building
+
+```sh
+docker build --pull -t gordonstratton/dynamodb-local:latest .
+```
+
+Then, tag the image with the date of the release and push it.
