@@ -1,9 +1,9 @@
-FROM openjdk:8-jre-slim
+FROM debian:stable-slim as build
 
-ARG ETAG="\"f513a2218eca571f079202945cea6a55-3\""
+ARG ETAG="\"f232b3933442e68c3856b5ddba8e5c7b-3\""
 
 RUN apt-get update && apt-get install -y \
-    curl \
+  curl \
   && mkdir /srv/dynamodb \
   && curl -H"If-Match: ${ETAG}" \
           -sL -o /tmp/dynamodb_local_latest.tar.gz \
@@ -13,15 +13,15 @@ RUN apt-get update && apt-get install -y \
   && cd /tmp \
   && sha256sum -c dynamodb_local_latest.tar.gz.sha256 \
   && cd / \
-  && tar -xz -C /srv/dynamodb -f /tmp/dynamodb_local_latest.tar.gz \
-  && chown -R nobody:nogroup /srv/dynamodb \
-  && rm -f /tmp/dynamodb_local_latest* \
-  && apt-get -y purge \
-     curl \
-  && apt-get -y autoremove \
-  && rm -rf /var/lib/apt/lists/*
+  && tar -xz -C /srv/dynamodb -f /tmp/dynamodb_local_latest.tar.gz
+
+FROM openjdk:jre-slim
 
 WORKDIR /srv/dynamodb
+
+COPY --from=build /srv/dynamodb /srv/dynamodb
+
+RUN chown -R nobody:nogroup /srv/dynamodb
 
 USER nobody:nogroup
 
@@ -30,7 +30,7 @@ EXPOSE 8000
 ENTRYPOINT [ \
   "java", \
   "-Djava.library.path=./DynamoDBLocal_lib", \
-  "-jar", "./DynamoDBLocal.jar" \
+  "-jar", "DynamoDBLocal.jar" \
 ]
 
 CMD ["-inMemory"]
